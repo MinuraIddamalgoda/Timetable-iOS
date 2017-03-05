@@ -21,10 +21,10 @@ class UnitViewController:
     lazy var viewControllerList: [UIViewController] = {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         
-        let vc1 = sb.instantiateViewController(withIdentifier: "OneVC")
-        let vc2 = sb.instantiateViewController(withIdentifier: "TwoVC")
-        let vc3 = sb.instantiateViewController(withIdentifier: "ThreeVC")
-        let vc4 = sb.instantiateViewController(withIdentifier: "FourVC")
+        let vc1 = sb.instantiateViewController(withIdentifier: "ArtsVC")
+        let vc2 = sb.instantiateViewController(withIdentifier: "CommerceVC")
+        let vc3 = sb.instantiateViewController(withIdentifier: "MedVC")
+        let vc4 = sb.instantiateViewController(withIdentifier: "ScienceVC")
         
         return [vc1, vc2, vc3, vc4]
     }()
@@ -36,6 +36,7 @@ class UnitViewController:
         
         createDummyUnits()
         createDummyAssessments()
+        createViewControllers()
     }
     
     // MARK: - Methods
@@ -55,23 +56,33 @@ class UnitViewController:
     }
     
     func createDummyAssessments() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss zzz"
+        let startCalendar = NSCalendar.current
+        let dueCalendar = NSCalendar(identifier: .gregorian)
         
-        var startDate: Date = dateFormatter.date(from: "Sun, 05 Mar 2017 00:01:00 AEST")!
-        var dueDate: Date = dateFormatter.date(from: "Fri, 17 Mar 2017 17:00:00 AEST")!
-        let artsAssign = Assessment("Essay 1", "Write a 1000 word essay", startDate, dueDate, "Assessment", 25.0)
+        var startDate = startCalendar.date(from: createDate(year: 2017, month: 4, day: 5))
+        var dueDate = dueCalendar!.date(from: createDate(year: 2017, month: 4, day: 17))
+        let artsAssign = Assessment("Essay 1", "Write a 1000 word essay", startDate!, dueDate!, "Assessment", 25.0)
         assessmentArr.append(artsAssign)
         
-        startDate = dateFormatter.date(from: "Tue, 21 Mar 2017 12:00:00 AEST")!
-        dueDate = dateFormatter.date(from: "Tue, 21 Mar 2017 13:00:00 AEST")!
-        let artsMidsem = Assessment("Midsem", "Mid-semester examination", startDate, dueDate, "Test", 25.0)
+        startDate = startCalendar.date(from: createDate(year: 2017, month: 4, day: 21))
+        dueDate = startCalendar.date(from: createDate(year: 2017, month: 4, day: 21))
+        let artsMidsem = Assessment("Midsem", "Mid-semester examination", startDate!, dueDate!, "Test", 25.0)
         assessmentArr.append(artsMidsem)
         
-        startDate = dateFormatter.date(from: "Thu, 01 Jun 2017 13:30:00 AEST")!
-        dueDate = dateFormatter.date(from: "Thu, 01 Jun 2017 15:30:00 AEST")!
-        let artsExam = Assessment("Final Exam", "Invigilated Examination", startDate, dueDate, "Exam", 50.0)
+        startDate = startCalendar.date(from: createDate(year: 2017, month: 6, day: 1))
+        dueDate = startCalendar.date(from: createDate(year: 2017, month: 6, day: 1))
+        let artsExam = Assessment("Final Exam", "Invigilated Examination", startDate!, dueDate!, "Exam", 50.0)
         assessmentArr.append(artsExam)
+    }
+    
+    // Creates and returns a DateComponents object with the specified input
+    // params
+    func createDate(year: Int, month: Int, day: Int) -> DateComponents {
+        var dateComponents = DateComponents()
+        dateComponents.year = year
+        dateComponents.month = month
+        dateComponents.day = day
+        return dateComponents
     }
     
     func createViewControllers() {
@@ -82,11 +93,24 @@ class UnitViewController:
     
     // MARK - UIPageViewControllerDataSource methods
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        return nil
+        
+        guard let vcIndex = viewControllerList.index(of: viewController) else {return nil}
+        
+        let previousIndex = vcIndex - 1
+        
+        guard previousIndex >= 0 else {return nil}
+        
+        return viewControllerList[previousIndex]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        return nil
+        guard let vcIndex = viewControllerList.index(of: viewController) else {return nil}
+        
+        let nextIndex = vcIndex + 1
+        
+        guard viewControllerList.count != nextIndex || viewControllerList.count > nextIndex else {return nil}
+        
+        return viewControllerList[nextIndex]
     }
 
 }
