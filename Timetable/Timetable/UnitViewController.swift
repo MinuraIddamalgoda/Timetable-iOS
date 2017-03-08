@@ -9,37 +9,49 @@
 import UIKit
 
 class UnitViewController:
-    UIPageViewController,
-    UIPageViewControllerDataSource {
+    UIViewController {
 
     // MARK: - Variables
     // MARK: Model
     var unitsArr = [Unit]()
     var assessmentArr = [Assessment]()
     
-    // MARK Controller
-    lazy var viewControllerList: [UIViewController] = {
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        
-        let vc1 = sb.instantiateViewController(withIdentifier: "ArtsVC")
-        let vc2 = sb.instantiateViewController(withIdentifier: "CommerceVC")
-        let vc3 = sb.instantiateViewController(withIdentifier: "MedVC")
-        let vc4 = sb.instantiateViewController(withIdentifier: "ScienceVC")
-        
-        return [vc1, vc2, vc3, vc4]
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.dataSource = self
-        
         createDummyUnits()
         createDummyAssessments()
-        createViewControllers()
+        
+        // Setting up UISegmentControl
+        for i in 0...(unitsArr.count - 1) {
+            segmentControl.setTitle(unitsArr[i].unitCode, forSegmentAt: i)
+        }
+    }
+    
+    // MARK: - Outlets
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet weak var bannerImageView: UIImageView!
+    
+    // MARK: - Actions
+    @IBAction func segmentControlValueChanged(_ sender: UISegmentedControl) {
+        bannerImageView.image = unitsArr[sender.selectedSegmentIndex].background
     }
     
     // MARK: - Methods
+    // Creates and returns a DateComponents object with the specified input
+    // params
+    func createDate(year: Int, month: Int, day: Int) -> DateComponents {
+        var dateComponents = DateComponents()
+        dateComponents.year = year
+        dateComponents.month = month
+        dateComponents.day = day
+        return dateComponents
+    }
+    
+    func segmentControlTapped() {
+        print("tapped")
+    }
+    
     // MARK: Dummy data methods
     func createDummyUnits() {
         let artsUnit = Unit("Arts Hello", "ATS1011", UIImage.init(named: "arts_background")!, "Faculty of Arts")
@@ -74,43 +86,4 @@ class UnitViewController:
         let artsExam = Assessment("Final Exam", "Invigilated Examination", startDate!, dueDate!, "Exam", 50.0)
         assessmentArr.append(artsExam)
     }
-    
-    // Creates and returns a DateComponents object with the specified input
-    // params
-    func createDate(year: Int, month: Int, day: Int) -> DateComponents {
-        var dateComponents = DateComponents()
-        dateComponents.year = year
-        dateComponents.month = month
-        dateComponents.day = day
-        return dateComponents
-    }
-    
-    func createViewControllers() {
-        if let firstViewController = viewControllerList.first {
-            self.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
-        }
-    }
-    
-    // MARK - UIPageViewControllerDataSource methods
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        
-        guard let vcIndex = viewControllerList.index(of: viewController) else {return nil}
-        
-        let previousIndex = vcIndex - 1
-        
-        guard previousIndex >= 0 else {return nil}
-        
-        return viewControllerList[previousIndex]
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let vcIndex = viewControllerList.index(of: viewController) else {return nil}
-        
-        let nextIndex = vcIndex + 1
-        
-        guard viewControllerList.count != nextIndex || viewControllerList.count > nextIndex else {return nil}
-        
-        return viewControllerList[nextIndex]
-    }
-
 }

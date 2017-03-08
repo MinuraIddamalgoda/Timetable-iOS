@@ -1,103 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="sx9-UY-NKU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KQD-j3-ieP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Unit View Controller-->
-        <scene sceneID="80v-sD-R7F">
+        <scene sceneID="gFB-Aa-KJL">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" pageSpacing="16" navigationOrientation="horizontal" spineLocation="none" id="sx9-UY-NKU" customClass="UnitViewController" customModule="Timetable" customModuleProvider="target" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7Ke-xR-6iP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1836" y="-620"/>
-        </scene>
-        <!--Arts-->
-        <scene sceneID="82e-Qu-otW">
-            <objects>
-                <viewController storyboardIdentifier="ArtsVC" title="Arts" id="Z2m-e7-xyj" sceneMemberID="viewController">
+                <viewController id="KQD-j3-ieP" customClass="UnitViewController" customModule="Timetable" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="FeX-ZP-usr"/>
-                        <viewControllerLayoutGuide type="bottom" id="kQI-YR-wC8"/>
+                        <viewControllerLayoutGuide type="top" id="Ktw-8h-rpC"/>
+                        <viewControllerLayoutGuide type="bottom" id="QsO-mv-WNF"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="7AV-5o-074">
+                    <view key="view" contentMode="scaleToFill" id="vkP-aH-0zV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arts_background" translatesAutoresizingMaskIntoConstraints="NO" id="Y3V-DR-sEj">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arts_background" translatesAutoresizingMaskIntoConstraints="NO" id="AXc-NX-s0h" userLabel="Banner Image">
+                                <rect key="frame" x="0.0" y="20" width="375" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="hZv-BO-7uH"/>
+                                    <constraint firstAttribute="height" constant="150" id="CNo-Yx-a6G"/>
                                 </constraints>
                             </imageView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbt-8P-PTh">
+                                <rect key="frame" x="24" y="214" width="327" height="443"/>
+                                <connections>
+                                    <segue destination="H8J-01-MPH" kind="embed" id="H3B-rx-d0y"/>
+                                </connections>
+                            </containerView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="1M5-6s-eOR" userLabel="Segment Control">
+                                <rect key="frame" x="24" y="178" width="327" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="0B3-ib-55Q"/>
+                                </constraints>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                    <segment title=""/>
+                                    <segment title=""/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentControlValueChanged:" destination="KQD-j3-ieP" eventType="valueChanged" id="pZA-ae-RJq"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Y3V-DR-sEj" secondAttribute="trailing" id="DWG-Gm-9KN"/>
-                            <constraint firstItem="Y3V-DR-sEj" firstAttribute="top" secondItem="7AV-5o-074" secondAttribute="top" id="EOr-EH-tT6"/>
-                            <constraint firstItem="Y3V-DR-sEj" firstAttribute="leading" secondItem="7AV-5o-074" secondAttribute="leading" id="Q5J-7r-uKD"/>
-                            <constraint firstItem="Y3V-DR-sEj" firstAttribute="centerX" secondItem="7AV-5o-074" secondAttribute="centerX" id="gcp-7e-39s"/>
+                            <constraint firstItem="nbt-8P-PTh" firstAttribute="trailing" secondItem="vkP-aH-0zV" secondAttribute="trailingMargin" constant="-8" id="45c-Yv-cDO"/>
+                            <constraint firstItem="1M5-6s-eOR" firstAttribute="top" secondItem="AXc-NX-s0h" secondAttribute="bottom" constant="8" id="7Xe-Yb-gMr"/>
+                            <constraint firstItem="AXc-NX-s0h" firstAttribute="leading" secondItem="vkP-aH-0zV" secondAttribute="leading" id="7bl-Xo-BDs"/>
+                            <constraint firstItem="1M5-6s-eOR" firstAttribute="trailing" secondItem="vkP-aH-0zV" secondAttribute="trailingMargin" constant="-8" id="Cs2-8r-92S"/>
+                            <constraint firstItem="AXc-NX-s0h" firstAttribute="centerX" secondItem="vkP-aH-0zV" secondAttribute="centerX" id="Dv0-U7-lda"/>
+                            <constraint firstItem="nbt-8P-PTh" firstAttribute="top" secondItem="1M5-6s-eOR" secondAttribute="bottom" constant="8" id="MWS-Lr-Kyr"/>
+                            <constraint firstAttribute="trailing" secondItem="AXc-NX-s0h" secondAttribute="trailing" id="MiE-ch-Urm"/>
+                            <constraint firstItem="1M5-6s-eOR" firstAttribute="leading" secondItem="vkP-aH-0zV" secondAttribute="leadingMargin" constant="8" id="OyY-5Q-KNO"/>
+                            <constraint firstItem="nbt-8P-PTh" firstAttribute="leading" secondItem="vkP-aH-0zV" secondAttribute="leadingMargin" constant="8" id="d9z-tp-HQm"/>
+                            <constraint firstItem="AXc-NX-s0h" firstAttribute="top" secondItem="Ktw-8h-rpC" secondAttribute="bottom" id="nPd-jA-mIa"/>
+                            <constraint firstItem="QsO-mv-WNF" firstAttribute="top" secondItem="nbt-8P-PTh" secondAttribute="bottom" constant="10" id="tFZ-X5-Wrj"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="bannerImageView" destination="AXc-NX-s0h" id="2dM-Ir-HZM"/>
+                        <outlet property="segmentControl" destination="1M5-6s-eOR" id="JmE-fk-b8z"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="s0Y-vW-Jl2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h4k-NZ-oz1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="748" y="69.715142428785612"/>
+            <point key="canvasLocation" x="391.19999999999999" y="-256.82158920539734"/>
         </scene>
-        <!--Commerce-->
-        <scene sceneID="e7L-hm-JPK">
+        <!--Assessment Table View Controller-->
+        <scene sceneID="yqL-CV-8ZK">
             <objects>
-                <viewController storyboardIdentifier="CommerceVC" title="Commerce" id="R5Z-hq-AuO" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ex7-j2-F4Z"/>
-                        <viewControllerLayoutGuide type="bottom" id="d4z-75-aSB"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="B4b-d1-ilO">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <tableViewController id="H8J-01-MPH" customClass="AssessmentTableViewController" customModule="Timetable" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="hVV-iA-qRV">
+                        <rect key="frame" x="0.0" y="0.0" width="327" height="443"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="T5H-2h-7pA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="assessmentCell" rowHeight="100" id="mqP-cV-30R">
+                                <rect key="frame" x="0.0" y="28" width="327" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mqP-cV-30R" id="BJB-d9-SSH">
+                                    <rect key="frame" x="0.0" y="0.0" width="327" height="99"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="H8J-01-MPH" id="Mb7-Ej-G4W"/>
+                            <outlet property="delegate" destination="H8J-01-MPH" id="jZ1-cI-Rig"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aou-Vd-8Xl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1470" y="70"/>
-        </scene>
-        <!--Medicine-->
-        <scene sceneID="Mdf-mi-s35">
-            <objects>
-                <viewController storyboardIdentifier="MedVC" title="Medicine" id="nrl-DH-EyN" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="xf8-Y3-dlQ"/>
-                        <viewControllerLayoutGuide type="bottom" id="hXK-Nq-SAG"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="783-Z3-CgR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wCf-CC-eN9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2194" y="70"/>
-        </scene>
-        <!--Science-->
-        <scene sceneID="sBk-Fc-iDz">
-            <objects>
-                <viewController storyboardIdentifier="ScienceVC" title="Science" id="FnJ-NR-w6X" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2w2-uj-2PA"/>
-                        <viewControllerLayoutGuide type="bottom" id="XDV-Kw-rf1"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Hbq-mn-HSX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FbJ-wH-qiO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2916" y="70"/>
+            <point key="canvasLocation" x="1104.8" y="-156.07196401799101"/>
         </scene>
     </scenes>
     <resources>
